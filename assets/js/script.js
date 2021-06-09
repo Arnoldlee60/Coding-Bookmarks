@@ -54,6 +54,22 @@ function createYouTubeEmbedLink (url) {
     return url.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
     }
 
+
+    fetch('http://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=javascript&intitle=how do you make a for loop&site=stackoverflow', 
+    {
+      method: 'GET', //GET is the default.
+      credentials: 'same-origin', // include, *same-origin, omit
+      redirect: 'follow', // manual, *follow, error
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+
+        console.log(data);
+        //console.log(data.url)
+       // console.log(data.description)
+      }); 
 /*
 
 
