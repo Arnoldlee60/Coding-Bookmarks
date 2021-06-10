@@ -1,10 +1,16 @@
 function search(){ //(description, tag) input and dropdown use onclick() to search on submit button
-  var inputtedSearch = document.querySelector('#input').value;
-  var inputtedTag = document.querySelector('#tags').value;
+  var inputtedSearch = document.querySelector('#input').value; //searching term w/ input
+  var inputtedTag = document.querySelector('#menuOptions').value; //searching tags w/ dropdown
+  const spaceFixer = function(inputtedSearch){
+    return inputtedSearch.trim().split(' ').join('%20');
+  } //function that fixes spaces
+  var inputtedSearchFinal = spaceFixer(inputtedSearch); //search with spaces finished
+  //document.write(inputtedSearch.replace(/ /g, '%20'));
     //var tag = 'javascript'; //change to dropdown menu value
     //var description = 'Uncaught TypeError' //change to input value
-    var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedSearch + '&intitle=' + inputtedTag + '&site=stackoverflow'
-    fetch(createLink, 
+    console.log(inputtedTag)
+    var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow'
+    fetch(createLink,
     {
       method: 'GET', //GET is the default.
       credentials: 'same-origin', // include, *same-origin, omit
@@ -20,10 +26,12 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
           console.log("No results found")
         }
         else{
+          console.log(createLink);
+          console.log(data);
           for(var i = 0; i < 5; i++) //data.items.length
           {
-            console.log(data);
-            //console.log(data.items[i].link)
+            //console.log(data);
+            console.log(data.items[i].link)
             //var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[i].link;
             //console.log("Link Preview Starts here ")
             //linkPreviewCreation(stacklink)
@@ -85,4 +93,5 @@ function createYouTubeEmbedLink (url) {
 todo:
 1. logic is good we have all we need from the api's but now we need to make the functions work with inputs
 2. make data come out on the page pretty
+3. inputted search does not like spaces
 */
