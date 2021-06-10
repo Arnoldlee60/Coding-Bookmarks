@@ -8,7 +8,7 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
   //document.write(inputtedSearch.replace(/ /g, '%20'));
     //var tag = 'javascript'; //change to dropdown menu value
     //var description = 'Uncaught TypeError' //change to input value
-    console.log(inputtedTag)
+    //console.log(inputtedTag)
     var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow'
     fetch(createLink,
     {
@@ -26,15 +26,15 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
           console.log("No results found")
         }
         else{
-          console.log(createLink);
+          //console.log(createLink);
           console.log(data);
           for(var i = 0; i < 5; i++) //data.items.length
           {
             //console.log(data);
-            console.log(data.items[i].link)
-            //var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[i].link;
-            //console.log("Link Preview Starts here ")
-            //linkPreviewCreation(stacklink)
+            //console.log("Link preview link = " + data.items[i].link)
+            var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[i].link;
+            console.log("Link Preview Starts here ")
+            linkPreviewCreation(stacklink)
             //onsole.log(data.description)
           }
         }
