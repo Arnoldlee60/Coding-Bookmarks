@@ -88,6 +88,18 @@ function createYouTubeEmbedLink (url) {
       }); //get all the popular tags from stackoverflow
 
 
+      //works from an on click on a button
+      var favArray = [];
+      function favButton(urlExample, descriptionExample){
+        //take in 2 parameters
+       for(var i = 0; i < 10; i ++)
+       {
+        favArray.push({url: "google.com", description: "blah blah blah" }); 
+       }
+       console.log(favArray)
+      }
+      
+
 
 /*
 todo:
