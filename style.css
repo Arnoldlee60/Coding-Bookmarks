@@ -1,0 +1,8 @@
+.box {
+    float: right;
+    width: 591px; 
+   height: 403px; 
+}
+.box-content{
+    color: green;
+}
