@@ -1,77 +1,68 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="./style.css"/>
-    <link rel="Stylesheet" a href="./assets/css/stylesheet.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <header>
-      <h1>Coding Bookmarks</h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">  
+  <link rel="Stylesheet" a href="./assets/css/stylesheet.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <header>
+    <h1>Coding Bookmarks</h1>
+  </header>
+  <div>
+
+  </div>
+  <div class="card" style="width: 300px" class="custom-card">
+    <div class="card-section">
+      <h4>This is a card.</h4>
+      <p>
+        It has an easy to override visual style, and is appropriately subdued.
+      </p>
+      <!--form-->
+      <input type="Search!" placeholder="Search!" id="input">
+      <select id="menuOptions" placeholder="Select a tag!">
+        <!--<option value="Maps">Maps</option>-->
+      </select>
+      <button onclick="favButton()">Click me</button>
+      <!--search()-->
+    </div>
+
+  </div>
+
+  </div>
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        Component
+      </p>
+      <button class="card-header-icon" aria-label="more options">
+        <span class="icon">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
     </header>
-    <div>
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li>
-        <a href="#">Item 1</a>
-        <ul class="menu">
-          <li><a href="#">Item 1A</a></li>
-          <!-- ... -->
-        </ul>
-      </li>
-      <li><a href="#">Item 2</a></li>
-      <li><a href="#">Item 3</a></li>
-      <li><a href="#">Item 4</a></li>
-    </ul>
-    </div>
-    <div class="card" style="width: 300px" class="custom-card">
-      <div class="card-divider">This is a header</div>
-      <img src="assets/img/generic/rectangle-1.jpg" />
-      <div class="card-section">
-        <h4>This is a card.</h4>
-        <p>
-          It has an easy to override visual style, and is appropriately subdued.
-        </p>
-        <form>
-          <div class="grid-container">
-            <div class="grid-x grid-padding-x">
-              <div class="large-12 cell">
-                <label>Input
-                  <input type="text" placeholder="Input">
-                </label>
-                <select id="menuOptions">
-                  <option value="Maps">Maps</option>
-                  <option value="Audio">Audio</option>
-                  <option value="Photos">Photos</option>
-                  <option value="Newspaper">Newspaper</option>
-                  <option value="film-and-videos">film-and-videos</option>
-                  <option value="notated-music">notated-music</option>
-                  <option value="websites">websites</option>
-                  </select>
-                <a href="about.html" class="button">Button</a>
-              </div>
-            </div>
-          </div>
-        </form>
+    <div class="card-content">
+      <div class="content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+        <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+        <br>
+        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
       </div>
-      <div class="col-md-9">
-        <div class="box">
-          <textarea class="box-content"id="cont-one">Info</textarea>
-        </div>
-            <div class="container">
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    <footer class="card-footer">
+      <a href="#" class="card-footer-item">Save</a>
+      <a href="#" class="card-footer-item">Edit</a>
+      <a href="#" class="card-footer-item">Delete</a>
+    </footer>
+  </div>
+  <script src="./assets/js/script.js"></script>
+</body>
+
 </html>
