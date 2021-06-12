@@ -31,10 +31,10 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
           for(var i = 0; i < 5; i++) //data.items.length
           {
             //console.log(data);
-            //console.log("Link preview link = " + data.items[i].link)
+            console.log("Link preview link = " + data.items[i].link)
             var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[i].link;
             console.log("Link Preview Starts here ")
-            linkPreviewCreation(stacklink)
+            //linkPreviewCreation(stacklink)
             //onsole.log(data.description)
           }
         }
@@ -88,22 +88,26 @@ function createYouTubeEmbedLink (url) {
       }); //get all the popular tags from stackoverflow
 
 
+
+
+      /*
       //works from an on click on a button
       var favArray = [];
       function favButton(urlExample, descriptionExample){
-        //take in 2 parameters
-       for(var i = 0; i < 10; i ++)
-       {
-        favArray.push({url: "google.com", description: "blah blah blah" }); 
-       }
-       console.log(favArray)
-      }
+      //take in 2 parameters
+
+      favArray.push({url: "google.com", description: "blah blah blah" }); 
+      console.log(favArray)
+      localStorage.setItem("favArray", JSON.stringify(favArray));
       
+      }
+      var storedNames = JSON.parse(localStorage.getItem("favArray"));
+      console.log(storedNames[i])
+      */
 
 
 /*
 todo:
 1. logic is good we have all we need from the api's but now we need to make the functions work with inputs
 2. make data come out on the page pretty
-3. inputted search does not like spaces
 */
