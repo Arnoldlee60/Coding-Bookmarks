@@ -99,7 +99,6 @@ function favButton(urlExample, descriptionExample) {
 
 
 
-
 /*
 todo:
 1. logic is good we have all we need from the api's but now we need to make the functions work with inputs
