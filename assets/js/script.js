@@ -28,13 +28,13 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
         else{
           //console.log(createLink);
           console.log(data);
-          for(var i = 0; i < 5; i++) //data.items.length
+          for(var i = 0; i < 1; i++) //data.items.length
           {
             //console.log(data);
             console.log("Link preview link = " + data.items[i].link)
             var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[i].link;
             console.log("Link Preview Starts here ")
-            //linkPreviewCreation(stacklink)
+            linkPreviewCreation(stacklink)
             //onsole.log(data.description)
           }
         }
@@ -53,9 +53,10 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
         })
         .then(function (data) {
   
-          //console.log(data);
+          console.log(data);
           console.log(data.url)
           console.log(data.description)
+          putInBox(data);
         }); //link preview creator 
       }
 
@@ -87,7 +88,26 @@ function createYouTubeEmbedLink (url) {
         }
       }); //get all the popular tags from stackoverflow
 
+      function putInBox(data){
+          var x = document.createElement("p");
+          x.setAttribute("id", "desc1", data.description);
+          var t = document.createTextNode(data.description);
+          x.appendChild(t);
+          document.getElementById("content1").appendChild(x);
 
+          var x = document.createElement("p");
+          x.setAttribute("id", "url1", data.url);
+          var t = document.createTextNode(data.url);
+          x.appendChild(t);
+          document.getElementById("url1").appendChild(x);
+
+          var x = document.createElement("IMG");
+          x.setAttribute("src", data.image);
+          x.setAttribute("width", "50");
+          x.setAttribute("height", "50");
+       
+         document.getElementById("img1").appendChild(x);
+      }
 
 
       /*
