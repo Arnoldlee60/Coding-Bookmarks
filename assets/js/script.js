@@ -152,7 +152,6 @@ function createYouTubeEmbedLink (url) {
       var favArray = [];
       function favButton(urlExample, descriptionExample){
       //take in 2 parameters
-
       favArray.push({url: "google.com", description: "blah blah blah" }); 
       console.log(favArray)
       localStorage.setItem("favArray", JSON.stringify(favArray));
