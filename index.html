@@ -52,7 +52,7 @@
       </p>
       <button class="button is-small" onclick="backLink()">Prev Link</button>
       <button class="button is-small" onclick="fwdLink()">Fwd Link</button>
-      <button class="button is-success">Save</button> <!--disable enable-->
+      <button class="button is-success" onclick="linkPreviewSave()">Save</button> <!--disable enable-->
     </header>
     <div class="card-content">
       <div class="content" id="content">
@@ -71,6 +71,9 @@
       <h2>Saved Links</h2>
     </div>
   </div>
+
+  <ul id="savedList"></ul>
+
   <div class="card" >
     <header class="card-header">
       <div>URL</div>
@@ -92,6 +95,7 @@
       <div id="footer"></div>
     </footer>
   </div>
+
   <script src="./assets/js/script.js"></script>
 </body>
 </html>

@@ -1,19 +1,19 @@
 var counter = 0; //moving the array
 var holdLink = "";
+var holdStackLink = "";
+let savedArray = [];
+let savedObject = {};
+var savedLinks = [];
 
 function search(){ //(description, tag) input and dropdown use onclick() to search on submit button
-  var inputtedSearch = document.querySelector('#input').value; //searching term w/ input
-  var inputtedTag = document.querySelector('#menuOptions').value; //searching tags w/ dropdown
-  const spaceFixer = function(inputtedSearch){
-    return inputtedSearch.trim().split(' ').join('%20');
-  } //function that fixes spaces
-  var inputtedSearchFinal = spaceFixer(inputtedSearch); //search with spaces finished
-  //document.write(inputtedSearch.replace(/ /g, '%20'));
-    //var tag = 'javascript'; //change to dropdown menu value
-    //var description = 'Uncaught TypeError' //change to input value
-    //console.log(inputtedTag)
-    var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow';
-    holdLink = createLink;
+var inputtedSearch = document.querySelector('#input').value; //searching term w/ input
+var inputtedTag = document.querySelector('#menuOptions').value; //searching tags w/ dropdown
+const spaceFixer = function(inputtedSearch){return inputtedSearch.trim().split(' ').join('%20');} //function that fixes spaces
+var inputtedSearchFinal = spaceFixer(inputtedSearch); //search with spaces finished
+
+var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow';
+holdLink = createLink;
+    //clear(); clear when already searched
     fetchLinks(createLink); //moved original to fetchLinks
     }
 
@@ -35,11 +35,11 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
             }
             else{
               //console.log(createLink);
-              console.log(data);
-                //there was a for loop here b4
+              //console.log(data);
                 //console.log(data);
                 //console.log("Link preview link = " + data.items[counter].link)
-                var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[counter].link;
+                var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356&q=' + data.items[counter].link;
+                holdStackLink = stacklink;
                 //console.log("Link Preview Starts here ");
                 //console.log("hold link = " + holdLink);
                 linkPreviewCreation(stacklink);
@@ -58,19 +58,31 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
           return response.json();
         })
         .then(function (data) {
-  
-          console.log(data);
-          console.log(data.url)
-          console.log(data.description)
+          //console.log(data); //console.log(data.url) //console.log(data.description)
           putInBox(data);
         }); //link preview creator 
       }
+      function linkPreviewSave(){
+        console.log(holdStackLink)
+        fetch(holdStackLink, 
+        {
+          method: 'GET', //GET is the default.
+          credentials: 'same-origin', // include, *same-origin, omit
+          redirect: 'follow', // manual, *follow, error
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+    
+            console.log(data);
+            //console.log(data.url); //console.log(data.description); //console.log(data.image);
 
-      var url = "https://www.youtube.com/watch?v=jNQXAC9IVRw"; //placeholder
-function createYouTubeEmbedLink (url) {
-    return url.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
-    }
-
+           
+            //console.log("array = url = " + savedArray[0].url);
+            //putInBox(data);
+          }); //link preview creator 
+        }
 
     fetch('http://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow', 
     {
@@ -82,7 +94,7 @@ function createYouTubeEmbedLink (url) {
         return response.json();
       })
       .then(function (data) {
-        //console.log(data);
+        //console.log(data); //when called too many times
         for(var i = 0 ; i < data.items.length; i++) //data.items.length
         {
         //console.log(data.items[i].name);
@@ -147,20 +159,39 @@ function createYouTubeEmbedLink (url) {
         var res3 = str3.replace(str3, ""); //1st para use str
         document.getElementById("footer").innerHTML = res3;
       }
-      /*
-      //works from an on click on a button
-      var favArray = [];
-      function favButton(urlExample, descriptionExample){
-      //take in 2 parameters
-      favArray.push({url: "google.com", description: "blah blah blah" }); 
-      console.log(favArray)
-      localStorage.setItem("favArray", JSON.stringify(favArray));
-      
-      }
-      var storedNames = JSON.parse(localStorage.getItem("favArray"));
-      console.log(storedNames[i])
-      */
 
+//======================= Saved stuff ==================================
+//todoForm.addEventListener("submit", function(event) {
+function addLinks(data){ //saving
+  savedObject.url = data.url;
+  savedObject.description = data.description;
+  savedObject.image = data.image;
+  savedArray.push(savedObject);
+  // Store updated Links in localStorage, re-render the list
+  storeLinks();
+  renderLinks();
+}
+function storeTodos() {
+  // Stringify and set key in localStorage to todos array
+  localStorage.setItem("links", JSON.stringify(links));
+}
+
+function renderTodos(){
+  todoList.innerHTML = "";
+  todoCountSpan.textContent = todos.length;
+
+  // Render a new li for each todo
+  for (var i = 0; i < todos.length; i++) {
+    var todo = todos[i];
+    var li = document.createElement("li");
+    li.textContent = todo;
+    li.setAttribute("data-index", i);
+    var button = document.createElement("button");
+    button.textContent = "Complete ✔️";
+    li.appendChild(button);
+    todoList.appendChild(li);
+}
+}
 
 /*
 todo:
