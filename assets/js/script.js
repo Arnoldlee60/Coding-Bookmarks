@@ -1,4 +1,5 @@
 var counter = 0; //moving the array
+var holdLink;
 
 function search(){ //(description, tag) input and dropdown use onclick() to search on submit button
   var inputtedSearch = document.querySelector('#input').value; //searching term w/ input
@@ -12,6 +13,7 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
     //var description = 'Uncaught TypeError' //change to input value
     //console.log(inputtedTag)
     var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow'
+    holdLink = createLink;
     fetch(createLink,
     {
       method: 'GET', //GET is the default.
@@ -111,17 +113,28 @@ function createYouTubeEmbedLink (url) {
          document.getElementById("footer").appendChild(x);
       }
 
-      function fwdLink(){
+      function fwdLink(holdLink){
         counter++;
+        clear();
+        //linkPreviewCreation(stacklink)
+
         var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[counter].link;
-        console.log("Link Preview Starts here ")
-        linkPreviewCreation(stacklink)
-        //fix here
-        var str = document.getElementById("desc").innerHTML; 
-        var res = str.replace(str, data.description); //1st para use str
-        document.getElementById("demo").innerHTML = res;
+        linkPreviewCreation(stacklink);
       }
 
+      function clear(){
+        var str = document.getElementById("content").innerHTML; 
+        var res = str.replace(str, ""); //1st para use str
+        document.getElementById("desc").innerHTML = res;
+
+        var str2 = document.getElementById("url").innerHTML; 
+        var res2 = str.replace(str2, ""); //1st para use str
+        document.getElementById("url").innerHTML = res;
+
+        var str3 = document.getElementById("url").innerHTML; 
+        var res3 = str3.replace(str3, ""); //1st para use str
+        document.getElementById("footer").innerHTML = res;
+      }
       /*
       //works from an on click on a button
       var favArray = [];

@@ -46,11 +46,12 @@
 
   <div class="card" >
     <header class="card-header">
+      <div>URL</div>
       <p class="card-header-title" id="url">
         <br>
       </p>
       <button class="button is-small">Prev Link</button>
-      <button class="button is-small">Fwd Link</button>
+      <button class="button is-small" onclick="fwdLink()">Fwd Link</button>
       <button class="button is-success">Save</button> <!--disable enable-->
     </header>
     <div class="card-content">
@@ -59,7 +60,10 @@
         <br>
       </div>
     </div>
-    <footer class="footer" id="footer">Link from </footer>
+    
+    <footer class="footer">Link From
+      <div id="footer"></div>
+    </footer>
     </select>
   </div>
   <script src="./assets/js/script.js"></script>
