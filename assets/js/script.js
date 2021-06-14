@@ -1,3 +1,5 @@
+var counter = 0; //moving the array
+
 function search(){ //(description, tag) input and dropdown use onclick() to search on submit button
   var inputtedSearch = document.querySelector('#input').value; //searching term w/ input
   var inputtedTag = document.querySelector('#menuOptions').value; //searching tags w/ dropdown
@@ -28,15 +30,15 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
         else{
           //console.log(createLink);
           console.log(data);
-          for(var i = 0; i < 1; i++) //data.items.length
-          {
+          //for(var i = 0; i < 1; i++) //data.items.length
+          //{
             //console.log(data);
-            console.log("Link preview link = " + data.items[i].link)
-            var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[i].link;
-            console.log("Link Preview Starts here ")
-            linkPreviewCreation(stacklink)
+            console.log("Link preview link = " + data.items[counter].link)
+            var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[counter].link;
+            console.log("Link Preview Starts here ");
+            linkPreviewCreation(stacklink);
             //onsole.log(data.description)
-          }
+          //}
         }
       }); 
     }
@@ -90,25 +92,35 @@ function createYouTubeEmbedLink (url) {
 
       function putInBox(data){
           var x = document.createElement("p");
-          x.setAttribute("id", "desc1", data.description);
+          x.setAttribute("id", "desc", data.description);
           var t = document.createTextNode(data.description);
           x.appendChild(t);
-          document.getElementById("content1").appendChild(x);
+          document.getElementById("content").appendChild(x);
 
-          var x = document.createElement("p");
-          x.setAttribute("id", "url1", data.url);
-          var t = document.createTextNode(data.url);
-          x.appendChild(t);
-          document.getElementById("url1").appendChild(x);
+          var x = document.createElement("a");
+          x.setAttribute("href", data.url);
+          x.innerHTML = (data.url);
+          document.getElementById("url").appendChild(x);
 
           var x = document.createElement("IMG");
+          x.setAttribute("id", "img")
           x.setAttribute("src", data.image);
           x.setAttribute("width", "50");
           x.setAttribute("height", "50");
        
-         document.getElementById("img1").appendChild(x);
+         document.getElementById("footer").appendChild(x);
       }
 
+      function fwdLink(){
+        counter++;
+        var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[counter].link;
+        console.log("Link Preview Starts here ")
+        linkPreviewCreation(stacklink)
+        //fix here
+        var str = document.getElementById("desc").innerHTML; 
+        var res = str.replace(str, data.description); //1st para use str
+        document.getElementById("demo").innerHTML = res;
+      }
 
       /*
       //works from an on click on a button
