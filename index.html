@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-<<<<<<< HEAD
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,64 +7,97 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
     integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">  
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="Stylesheet" a href="./assets/css/stylesheet.css" />
   <title>Document</title>
 </head>
-
 <body>
-  <header>
+  <header style="margin:10px 0;">
     <h1>Coding Bookmarks</h1>
   </header>
   <div>
-
   </div>
-  <div class="card" style="width: 300px" class="custom-card">
-    <div class="card-section">
-      <h4>This is a card.</h4>
-      <p>
-        It has an easy to override visual style, and is appropriately subdued.
-      </p>
-      <!--form-->
-      <input type="Search!" placeholder="Search!" id="input">
-      <select id="menuOptions" placeholder="Select a tag!">
-        <!--<option value="Maps">Maps</option>-->
-      </select>
-      <button onclick="favButton()">Click me</button>
-      <!--search()-->
-    </div>
-
-  </div>
-
-  </div>
-  <div class="card">
+  <content>
+    <div class="w3-row w3-border w3-margin" style="width: 300px" class="card">
     <header class="card-header">
       <p class="card-header-title">
-        Component
+        Search here!
       </p>
-      <button class="card-header-icon" aria-label="more options">
-        <span class="icon">
-          <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
-      </button>
     </header>
-    <div class="card-content">
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-        <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-        <br>
-        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      <!--form-->
+      <div class="card-content">
+      <div class="center">
+        <input type="Search!" placeholder="Search!" id="input" style="width: 200px;">
+        <select id="menuOptions" placeholder="Select a tag!" style="width: 200px;">
       </div>
     </div>
-    <footer class="card-footer">
-      <a href="#" class="card-footer-item">Save</a>
-      <a href="#" class="card-footer-item">Edit</a>
-      <a href="#" class="card-footer-item">Delete</a>
+      </select>
+     
+      <!--search()-->
+      <footer class="card-footer">
+        <div class="center">
+        <button class="button is-link" onclick="search()">Search</button>
+        </div>
+      </footer>
+    </div>
+  </content>
+  </div>
+  </div>
+
+  <div class="card" >
+    <header class="card-header">
+      <div>URL</div>
+      <p class="card-header-title" id="url">
+        <br>
+      </p>
+      <button class="button is-small" onclick="backLink()">Prev Link</button>
+      <button class="button is-small" onclick="fwdLink()">Fwd Link</button>
+      <button class="button is-success">Save</button> <!--disable enable-->
+    </header>
+    <div class="card-content">
+      <div class="content" id="content">
+        Description
+        <div id="desc"></div>
+        <br>
+      </div>
+    </div>
+    <footer class="footer">Link From
+      <div id="footer"></div>
+    </footer>
+  </div>
+<br>
+  <div class="savedLinks">
+    <div style="text-align: center;">
+      <h2>Saved Links</h2>
+    </div>
+  </div>
+  <div class="card" >
+    <header class="card-header">
+      <div>URL</div>
+      <p class="card-header-title" id="url">
+        <br>
+      </p>
+      <button class="button is-small" onclick="backLink()">Prev Link</button>
+      <button class="button is-small" onclick="fwdLink()">Fwd Link</button>
+      <button class="button is-success">Save</button> <!--disable enable-->
+    </header>
+    <div class="card-content">
+      <div class="content" id="content">
+        Description
+        <div id="desc"></div>
+        <br>
+      </div>
+    </div>
+    <footer class="footer">Link From
+      <div id="footer"></div>
     </footer>
   </div>
   <script src="./assets/js/script.js"></script>
 </body>
-
-=======
+</html>
+<!--
+<!DOCTYPE html>
+<html class="no-js" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -77,6 +108,7 @@
       integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="Stylesheet" a href="./assets/css/stylesheet.css" />
     <title>Document</title>
   </head>
@@ -87,25 +119,72 @@
     <div>
     
     </div>
+      split
     <div class="card" style="width: 300px" class="custom-card">
       <div class="card-section">
         <h4>This is a card.</h4>
         <p>
           It has an easy to override visual style, and is appropriately subdued.
         </p>
-    <!--form-->
             <input type="Search!" placeholder="Search!" id ="input">
                 <select id="menuOptions" placeholder="Select a tag!">
-                  <!--<option value="Maps">Maps</option>-->
+               
                   </select>
                   <button onclick="favButton()">Click me</button>
-                  <!--search()-->
-              </div>
-            
-          </div>
        
+              </div>
+          </div>
+          
+        
+                                        split
+                                        
+      <div class="card" style="width: 300px" class="custom-card" >
+          <header class="card-header" >
+            <p class="card-header-title">
+              Component
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <div>
+                <input type="Search!" placeholder="Search!" id ="input">
+                <select id="menuOptions" placeholder="Select a tag!">
+</select>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <div class="center">
+              <button class="button" onclick="search()">Search</button>
+            </div>
+          </footer>
+        </div>
+      </div>
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title" id="img1">
+            
+            <br>
+          </p>
+          <button class="button is-success" class="card-header-icon" aria-label="more options" >
+            <span class="icon">
+              <i class="fas fa-angle-down" aria-hidden="true">💾</i>
+            </span>
+          </button>
+        </header>
+        <div class="card-content">
+          <div class="content" id="content1">
+            
+            <br>
+          </div>
+        </div>
+        <footer class="card-footer" id="url1">
+          
+          <br>
+        </footer>
+      </div>
       </div>
     <script src="./assets/js/script.js"></script>
   </body>
->>>>>>> main
 </html>
+-->
