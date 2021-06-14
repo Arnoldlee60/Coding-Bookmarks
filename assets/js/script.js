@@ -120,10 +120,18 @@ function createYouTubeEmbedLink (url) {
         clear();
         //console.log(this.holdLink) //use hold to use global variable
         fetchLinks(this.holdLink);
-        //search()
-        //linkPreviewCreation(stacklink)
-        //fetch from here to get new links :)
-
+      }
+      function backLink(holdLink){
+        counter--;
+        if(counter >= 0)
+        {
+        clear();
+        fetchLinks(this.holdLink);
+        }
+        else
+        {
+          counter = 0; //dont go negative
+        }
       }
 
       function clear(){
