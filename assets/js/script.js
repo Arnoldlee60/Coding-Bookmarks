@@ -1,5 +1,5 @@
 var counter = 0; //moving the array
-var holdLink;
+var holdLink = "";
 
 function search(){ //(description, tag) input and dropdown use onclick() to search on submit button
   var inputtedSearch = document.querySelector('#input').value; //searching term w/ input
@@ -12,37 +12,39 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
     //var tag = 'javascript'; //change to dropdown menu value
     //var description = 'Uncaught TypeError' //change to input value
     //console.log(inputtedTag)
-    var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow'
+    var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow';
     holdLink = createLink;
-    fetch(createLink,
-    {
-      method: 'GET', //GET is the default.
-      credentials: 'same-origin', // include, *same-origin, omit
-      redirect: 'follow', // manual, *follow, error
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        //console.log(data);
-        if(data.items.length == 0)
+    fetchLinks(createLink); //moved original to fetchLinks
+    }
+
+    function fetchLinks(link){
+      fetch(link,
         {
-          console.log("No results found")
-        }
-        else{
-          //console.log(createLink);
-          console.log(data);
-          //for(var i = 0; i < 1; i++) //data.items.length
-          //{
+          method: 'GET', //GET is the default.
+          credentials: 'same-origin', // include, *same-origin, omit
+          redirect: 'follow', // manual, *follow, error
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
             //console.log(data);
-            console.log("Link preview link = " + data.items[counter].link)
-            var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[counter].link;
-            console.log("Link Preview Starts here ");
-            linkPreviewCreation(stacklink);
-            //onsole.log(data.description)
-          //}
-        }
-      }); 
+            if(data.items.length == 0)
+            {
+              console.log("No results found")
+            }
+            else{
+              //console.log(createLink);
+              console.log(data);
+                //there was a for loop here b4
+                //console.log(data);
+                //console.log("Link preview link = " + data.items[counter].link)
+                var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[counter].link;
+                //console.log("Link Preview Starts here ");
+                //console.log("hold link = " + holdLink);
+                linkPreviewCreation(stacklink);
+            }
+          }); 
     }
 
     function linkPreviewCreation(stacklink){
@@ -116,24 +118,26 @@ function createYouTubeEmbedLink (url) {
       function fwdLink(holdLink){
         counter++;
         clear();
+        //console.log(this.holdLink) //use hold to use global variable
+        fetchLinks(this.holdLink);
+        //search()
         //linkPreviewCreation(stacklink)
+        //fetch from here to get new links :)
 
-        var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[counter].link;
-        linkPreviewCreation(stacklink);
       }
 
       function clear(){
-        var str = document.getElementById("content").innerHTML; 
-        var res = str.replace(str, ""); //1st para use str
-        document.getElementById("desc").innerHTML = res;
+        var str1 = document.getElementById("desc").innerHTML; 
+        var res1 = str1.replace(str1, ""); //1st para use str
+        document.getElementById("content").innerHTML = res1;
 
         var str2 = document.getElementById("url").innerHTML; 
-        var res2 = str.replace(str2, ""); //1st para use str
-        document.getElementById("url").innerHTML = res;
+        var res2 = str2.replace(str2, ""); //1st para use str
+        document.getElementById("url").innerHTML = res2;
 
-        var str3 = document.getElementById("url").innerHTML; 
+        var str3 = document.getElementById("footer").innerHTML; 
         var res3 = str3.replace(str3, ""); //1st para use str
-        document.getElementById("footer").innerHTML = res;
+        document.getElementById("footer").innerHTML = res3;
       }
       /*
       //works from an on click on a button
