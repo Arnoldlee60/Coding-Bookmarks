@@ -12,7 +12,7 @@ var inputtedTag = document.querySelector('#menuOptions').value; //searching tags
 const spaceFixer = function(inputtedSearch){return inputtedSearch.trim().split(' ').join('%20');} //function that fixes spaces
 var inputtedSearchFinal = spaceFixer(inputtedSearch); //search with spaces finished
 
-var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow';
+var createLink =  'https://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow';
 holdLink = createLink;
     clear(); clear //when already searched
     fetchLinks(createLink); //moved original to fetchLinks
@@ -39,7 +39,7 @@ holdLink = createLink;
               //console.log(data);
                 //console.log(data);
                 //console.log("Link preview link = " + data.items[counter].link)
-                var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356&q=' + data.items[counter].link;
+                var stacklink = 'https://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356&q=' + data.items[counter].link;
                 holdStackLink = stacklink;
                 //console.log("Link Preview Starts here ");
                 //console.log("hold link = " + holdLink);
@@ -86,7 +86,7 @@ holdLink = createLink;
           }); //link preview creator 
         }
 
-    fetch('http://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow', 
+    fetch('https://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow', 
     {
       method: 'GET', //GET is the default.
       credentials: 'same-origin', // include, *same-origin, omit
@@ -96,7 +96,7 @@ holdLink = createLink;
         return response.json();
       })
       .then(function (data) {
-        //console.log(data); //when called too many times
+        console.log(data); //when called too many times
         for(var i = 0 ; i < data.items.length; i++) //data.items.length
         {
         //console.log(data.items[i].name);
@@ -193,7 +193,7 @@ function renderLinks(){
     var li = document.createElement("li");
     li.textContent = hold; //savedArray
     li.setAttribute("data-index", 0);
-    var button = document.createElement("button");
+    var button = document.createElement("button"); //maybe another button to go to link
     button.textContent = "Delete ❌";
     li.appendChild(button);
     savedList.appendChild(li);
