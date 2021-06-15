@@ -1,19 +1,20 @@
 var counter = 0; //moving the array
 var holdLink = "";
+var holdStackLink = "";
+let savedArray = [];
+//let savedObject = {};
+var savedLinks = [];
+var savedList = document.querySelector("#savedList");
 
 function search(){ //(description, tag) input and dropdown use onclick() to search on submit button
-  var inputtedSearch = document.querySelector('#input').value; //searching term w/ input
-  var inputtedTag = document.querySelector('#menuOptions').value; //searching tags w/ dropdown
-  const spaceFixer = function(inputtedSearch){
-    return inputtedSearch.trim().split(' ').join('%20');
-  } //function that fixes spaces
-  var inputtedSearchFinal = spaceFixer(inputtedSearch); //search with spaces finished
-  //document.write(inputtedSearch.replace(/ /g, '%20'));
-    //var tag = 'javascript'; //change to dropdown menu value
-    //var description = 'Uncaught TypeError' //change to input value
-    //console.log(inputtedTag)
-    var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow';
-    holdLink = createLink;
+var inputtedSearch = document.querySelector('#input').value; //searching term w/ input
+var inputtedTag = document.querySelector('#menuOptions').value; //searching tags w/ dropdown
+const spaceFixer = function(inputtedSearch){return inputtedSearch.trim().split(' ').join('%20');} //function that fixes spaces
+var inputtedSearchFinal = spaceFixer(inputtedSearch); //search with spaces finished
+
+var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow';
+holdLink = createLink;
+    clear(); clear //when already searched
     fetchLinks(createLink); //moved original to fetchLinks
     }
 
@@ -35,11 +36,11 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
             }
             else{
               //console.log(createLink);
-              console.log(data);
-                //there was a for loop here b4
+              //console.log(data);
                 //console.log(data);
                 //console.log("Link preview link = " + data.items[counter].link)
-                var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356 &q=' + data.items[counter].link;
+                var stacklink = 'http://api.linkpreview.net/?key=6183f2f21f3a5da93aa0c053ff2a7356&q=' + data.items[counter].link;
+                holdStackLink = stacklink;
                 //console.log("Link Preview Starts here ");
                 //console.log("hold link = " + holdLink);
                 linkPreviewCreation(stacklink);
@@ -58,19 +59,32 @@ function search(){ //(description, tag) input and dropdown use onclick() to sear
           return response.json();
         })
         .then(function (data) {
-  
-          console.log(data);
-          console.log(data.url)
-          console.log(data.description)
+          //console.log(data); //console.log(data.url) //console.log(data.description)
           putInBox(data);
         }); //link preview creator 
       }
 
-      var url = "https://www.youtube.com/watch?v=jNQXAC9IVRw"; //placeholder
-function createYouTubeEmbedLink (url) {
-    return url.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
-    }
+      function linkPreviewSave(){
+        console.log(holdStackLink)
+        fetch(holdStackLink, 
+        {
+          method: 'GET', //GET is the default.
+          credentials: 'same-origin', // include, *same-origin, omit
+          redirect: 'follow', // manual, *follow, error
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+    
+            console.log(data);
+            //console.log(data.url); //console.log(data.description); //console.log(data.image);
 
+           addLinks(data);
+            //console.log("array = url = " + savedArray[0].url);
+            //putInBox(data);
+          }); //link preview creator 
+        }
 
     fetch('http://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow', 
     {
@@ -82,7 +96,7 @@ function createYouTubeEmbedLink (url) {
         return response.json();
       })
       .then(function (data) {
-        //console.log(data);
+        //console.log(data); //when called too many times
         for(var i = 0 ; i < data.items.length; i++) //data.items.length
         {
         //console.log(data.items[i].name);
@@ -147,21 +161,76 @@ function createYouTubeEmbedLink (url) {
         var res3 = str3.replace(str3, ""); //1st para use str
         document.getElementById("footer").innerHTML = res3;
       }
-      /*
-      //works from an on click on a button
-      var favArray = [];
-      function favButton(urlExample, descriptionExample){
-      //take in 2 parameters
-      favArray.push({url: "google.com", description: "blah blah blah" }); 
-      console.log(favArray)
-      localStorage.setItem("favArray", JSON.stringify(favArray));
-      
-      }
-      var storedNames = JSON.parse(localStorage.getItem("favArray"));
-      console.log(storedNames[i])
-      */
+
+//======================= Saved stuff ==================================
+//todoForm.addEventListener("submit", function(event) {
+function addLinks(data){ //saving
+ 
+let savedObject = {
+  url: data.url,
+  description: data.description,
+  image: data.image
+}
+
+  savedArray.push(savedObject);
+  // Store updated Links in localStorage, re-render the list
+  storeLinks();
+  renderLinks();
+}
+function storeLinks() {
+  // Stringify and set key in localStorage to todos array
+  localStorage.setItem("savedArray", JSON.stringify(savedArray));
+  //console.log(savedArray.length);
+}
+
+function renderLinks(){
+  savedList.innerHTML = "";
+  //todoCountSpan.textContent = savedLinks.length;
+  // Render a new li for each link
+  console.log(savedArray);
+  for (var i = 0; i < savedArray.length; i++) {
+    var hold = savedArray[i].url;
+    var li = document.createElement("li");
+    li.textContent = hold; //savedArray
+    li.setAttribute("data-index", 0);
+    var button = document.createElement("button");
+    button.textContent = "Delete ❌";
+    li.appendChild(button);
+    savedList.appendChild(li);
+}
+}
 
 
+function init() {
+  // Get stored todos from localStorage
+  var storedLinks = JSON.parse(localStorage.getItem("savedArray"));
+
+  // If todos were retrieved from localStorage, update the todos array to it
+  if (storedLinks !== null) {
+    savedArray = storedLinks;
+  }
+
+  // This is a helper function that will render todos to the DOM
+  renderLinks();
+}
+init();
+
+
+// Add click event to todoList element
+savedList.addEventListener("click", function(event) {
+  var element = event.target;
+
+  // Checks if element is a button
+  if (element.matches("button") === true) {
+    // Get its data-index value and remove the todo element from the list
+    var index = element.parentElement.getAttribute("data-index");
+    savedArray.splice(index, 1);
+
+    // Store updated todos in localStorage, re-render the list
+    storeLinks();
+    renderLinks();
+  }
+});
 /*
 todo:
 1. logic is good we have all we need from the api's but now we need to make the functions work with inputs
