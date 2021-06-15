@@ -1,8 +1,10 @@
-
+body {
+  background-color: #eff5f8;
+}
 h1 {
   margin: auto;
   text-align: center;
-  background-color: midnightblue;
+  background-color: #001b44;
   color: white;
   padding: 50px;
   font-family: sans-serif;
@@ -10,10 +12,12 @@ h1 {
 }
 .w3-row{
   width: 350px;
-  height: 300px;
+  height: 293px;
   padding: 15px;
   border: 2px solid black;
   float:left;
+  background-color:  #001b44;
+  color: white;
 }
 
 .card {
@@ -23,12 +27,66 @@ h1 {
   border: 2px solid black;
   margin: 20px auto;
   border-spacing: 30px 50px;
+  background-color:  #001b44;
+  color: white;
 }
-
 .center{
   margin-left: auto;
   margin-right: auto;
 }
 #footer{
   float: right;
+}
+#header{
+  height: auto;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  background-color: white;
+}
+
+li {
+  height: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color:  #001b44;
+  color: white;
+  flex: auto;
+  /*
+  font-size: 1.5em;
+  line-height: 1.5;
+  */
+}
+
+li:before {
+  content: "\200B";
+  position: absolute;
+}
+
+li::after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+li button {
+  float: right;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  background-color: #ff7034;
+  color: white;
+  font-size: 1em;
+  flex: auto;
+}
+.card-header-title{
+  color: white;
 }

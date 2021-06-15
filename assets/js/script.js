@@ -14,7 +14,7 @@ var inputtedSearchFinal = spaceFixer(inputtedSearch); //search with spaces finis
 
 var createLink =  'http://api.stackexchange.com/2.2/search?order=desc&sort=relevance&tagged=' + inputtedTag + '&intitle=' + inputtedSearchFinal + '&site=stackoverflow';
 holdLink = createLink;
-    //clear(); clear when already searched
+    clear(); clear //when already searched
     fetchLinks(createLink); //moved original to fetchLinks
     }
 
@@ -194,7 +194,7 @@ function renderLinks(){
     li.textContent = hold; //savedArray
     li.setAttribute("data-index", 0);
     var button = document.createElement("button");
-    button.textContent = "Complete ✔️";
+    button.textContent = "Delete ❌";
     li.appendChild(button);
     savedList.appendChild(li);
 }
@@ -215,6 +215,22 @@ function init() {
 }
 init();
 
+
+// Add click event to todoList element
+savedList.addEventListener("click", function(event) {
+  var element = event.target;
+
+  // Checks if element is a button
+  if (element.matches("button") === true) {
+    // Get its data-index value and remove the todo element from the list
+    var index = element.parentElement.getAttribute("data-index");
+    savedArray.splice(index, 1);
+
+    // Store updated todos in localStorage, re-render the list
+    storeLinks();
+    renderLinks();
+  }
+});
 /*
 todo:
 1. logic is good we have all we need from the api's but now we need to make the functions work with inputs
