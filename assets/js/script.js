@@ -2,8 +2,9 @@ var counter = 0; //moving the array
 var holdLink = "";
 var holdStackLink = "";
 let savedArray = [];
-let savedObject = {};
+//let savedObject = {};
 var savedLinks = [];
+var savedList = document.querySelector("#savedList");
 
 function search(){ //(description, tag) input and dropdown use onclick() to search on submit button
 var inputtedSearch = document.querySelector('#input').value; //searching term w/ input
@@ -62,6 +63,7 @@ holdLink = createLink;
           putInBox(data);
         }); //link preview creator 
       }
+
       function linkPreviewSave(){
         console.log(holdStackLink)
         fetch(holdStackLink, 
@@ -78,7 +80,7 @@ holdLink = createLink;
             console.log(data);
             //console.log(data.url); //console.log(data.description); //console.log(data.image);
 
-           
+           addLinks(data);
             //console.log("array = url = " + savedArray[0].url);
             //putInBox(data);
           }); //link preview creator 
@@ -163,35 +165,55 @@ holdLink = createLink;
 //======================= Saved stuff ==================================
 //todoForm.addEventListener("submit", function(event) {
 function addLinks(data){ //saving
-  savedObject.url = data.url;
-  savedObject.description = data.description;
-  savedObject.image = data.image;
+ 
+let savedObject = {
+  url: data.url,
+  description: data.description,
+  image: data.image
+}
+
   savedArray.push(savedObject);
   // Store updated Links in localStorage, re-render the list
   storeLinks();
   renderLinks();
 }
-function storeTodos() {
+function storeLinks() {
   // Stringify and set key in localStorage to todos array
-  localStorage.setItem("links", JSON.stringify(links));
+  localStorage.setItem("savedArray", JSON.stringify(savedArray));
+  //console.log(savedArray.length);
 }
 
-function renderTodos(){
-  todoList.innerHTML = "";
-  todoCountSpan.textContent = todos.length;
-
-  // Render a new li for each todo
-  for (var i = 0; i < todos.length; i++) {
-    var todo = todos[i];
+function renderLinks(){
+  savedList.innerHTML = "";
+  //todoCountSpan.textContent = savedLinks.length;
+  // Render a new li for each link
+  console.log(savedArray);
+  for (var i = 0; i < savedArray.length; i++) {
+    var hold = savedArray[i].url;
     var li = document.createElement("li");
-    li.textContent = todo;
-    li.setAttribute("data-index", i);
+    li.textContent = hold; //savedArray
+    li.setAttribute("data-index", 0);
     var button = document.createElement("button");
     button.textContent = "Complete ✔️";
     li.appendChild(button);
-    todoList.appendChild(li);
+    savedList.appendChild(li);
 }
 }
+
+
+function init() {
+  // Get stored todos from localStorage
+  var storedLinks = JSON.parse(localStorage.getItem("savedArray"));
+
+  // If todos were retrieved from localStorage, update the todos array to it
+  if (storedLinks !== null) {
+    savedArray = storedLinks;
+  }
+
+  // This is a helper function that will render todos to the DOM
+  renderLinks();
+}
+init();
 
 /*
 todo:
